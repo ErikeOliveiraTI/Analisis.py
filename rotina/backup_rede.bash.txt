@@ -1,0 +1,104 @@
+#!/bin/bash
+
+##########################################
+# CONFIGURAÇÃO DO LOG
+##########################################
+LOG_DIR="/var/log/rotina"
+mkdir -p "$LOG_DIR"
+
+# Cria nome de log diário: rotina-2025-11-21.log
+LOG_FILE="$LOG_DIR/rotina-$(date +%Y-%m-%d).log"
+
+# Redirecionar tudo para o log
+exec >> "$LOG_FILE" 2>&1
+
+echo ""
+echo "=============================================="
+echo "   Rotina iniciada em: $(date)"
+echo "=============================================="
+
+	#echo "Copiando arquivo Caixa.xlsx da rede..."
+
+	#cp "/z/01. FO Tejo/Caixa.xlsx"
+	
+
+echo "Arquivo copiado com sucesso!"
+
+
+##########################################
+# Função: converte Z:\caminho → /z/caminho
+##########################################
+convert_path() {
+    local win_path="$1"
+
+    win_path="${win_path%\"}"
+    win_path="${win_path#\"}"
+
+    local drive=$(echo "$win_path" | cut -d':' -f1 | tr 'A-Z' 'a-z')
+    local path=$(echo "$win_path" | cut -d':' -f2)
+    path="${path//\\/\/}"
+
+    echo "/${drive}${path}"
+}
+
+##########################################
+# Caminhos originais no estilo Windows
+##########################################
+ORIGEM_WIN='Z:\01. FO Tejo\02. Night Auditor\Relatórios & Ficheiros\Relatorios'
+DESTINO_WIN='Z:\git\rotina'
+
+##########################################
+# Converter caminhos para formato Bash
+##########################################
+ORIGEM=$(convert_path "$ORIGEM_WIN")
+DESTINO_BASE=$(convert_path "$DESTINO_WIN")
+
+echo "Origem convertida : $ORIGEM"
+echo "Destino base      : $DESTINO_BASE"
+
+##########################################
+# Criar nome da pasta: "21 NOV"
+##########################################
+DATA=$(date +"%d %b" | tr 'a-z' 'A-Z')
+DESTINO="${DESTINO_BASE}/${DATA}"
+
+echo "Destino final     : $DESTINO"
+
+##########################################
+# COPIANDO ARQUIVO CAIXA DE REDE 
+# ########################################
+
+echo "Copiando "
+
+cp "/z/01. FO Tejo/Caixa.xlsx" "$DESTINO/"
+
+##########################################
+# Verificar existência da origem
+##########################################
+if [ ! -d "$ORIGEM" ]; then
+    echo "ERRO: A pasta de origem não existe: $ORIGEM"
+    echo "Rotina abortada."
+    exit 1
+fi
+
+##########################################
+# Criar destino
+##########################################
+mkdir -p "$DESTINO"
+
+##########################################
+# Copiar ficheiros
+##########################################
+echo "A copiar ficheiros..."
+cp -r "$ORIGEM"/* "$DESTINO"
+
+if [ $? -eq 0 ]; then
+    echo "Cópia concluída com sucesso."
+else
+    echo "ERRO ao copiar ficheiros."
+fi
+
+echo "Ficheiros guardados em: $DESTINO"
+echo "Rotina terminada às: $(date)"
+echo "=============================================="
+echo ""
