@@ -1,0 +1,59 @@
+================================================
+Backup iniciado em: 15 de jan de 2026 22:52:57
+================================================
+==============================================
+Verificando unidade de rede: 15 de jan de 2026 22:52:58
+==============================================
+Unidade de rede verificada com sucesso.
+
+Criando pastas...
+
+Validando origem...
+Origem encontrada.
+Copiando Caixa.xlsx...
+Copiando relatórios...
+Relatórios copiados com sucesso.
+
+Ficheiros guardados em: /z/git/rotina/15 JAN
+Rotina finalizada: 15 de jan de 2026 22:53:03
+==============================================
+================================================
+Backup iniciado em: 15 de jan de 2026 22:53:19
+================================================
+Unidade de rede OK: /z
+Destino criado: /z/git/rotina/2026-01-15
+Origem encontrada.
+Copiando Caixa.xlsx
+'/z/Caixa_1.xlsx' -> '/z/git/rotina/2026-01-15/Caixa_1.xlsx'
+AVISO: Mapa transfer não encontrado
+Copiando relatórios...
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./Thumbs.db' -> '/z/git/rotina/2026-01-15/./Thumbs.db'
+"/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./150. Manager's Report.pdf" -> "/z/git/rotina/2026-01-15/./150. Manager's Report.pdf"
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./150. Histórico e Previsão 2027.xlsx' -> '/z/git/rotina/2026-01-15/./150. Histórico e Previsão 2027.xlsx'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./151. INE.pdf' -> '/z/git/rotina/2026-01-15/./151. INE.pdf'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./52. Relatório Sumário de Governanta.pdf' -> '/z/git/rotina/2026-01-15/./52. Relatório Sumário de Governanta.pdf'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./Disponibilidade 3 Meses.png' -> '/z/git/rotina/2026-01-15/./Disponibilidade 3 Meses.png'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./53.Tarefas F.O.pdf' -> '/z/git/rotina/2026-01-15/./53.Tarefas F.O.pdf'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./53.Tarefas HSK.pdf' -> '/z/git/rotina/2026-01-15/./53.Tarefas HSK.pdf'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./112. Diário Financeiro por data de lançamentos.pdf' -> '/z/git/rotina/2026-01-15/./112. Diário Financeiro por data de lançamentos.pdf'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./61. Relatório de Facturas - Notas de Crédito.pdf' -> '/z/git/rotina/2026-01-15/./61. Relatório de Facturas - Notas de Crédito.pdf'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./04. Saídas.pdf' -> '/z/git/rotina/2026-01-15/./04. Saídas.pdf'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./02. Chegadas Booking.pdf' -> '/z/git/rotina/2026-01-15/./02. Chegadas Booking.pdf'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./FR85106.pdf' -> '/z/git/rotina/2026-01-15/./FR85106.pdf'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./70. Diário de Lançamentos sem Splits.pdf' -> '/z/git/rotina/2026-01-15/./70. Diário de Lançamentos sem Splits.pdf'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./40. Reservas.pdf' -> '/z/git/rotina/2026-01-15/./40. Reservas.pdf'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./09. Mapa de Refeições - Geral.pdf' -> '/z/git/rotina/2026-01-15/./09. Mapa de Refeições - Geral.pdf'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./70. Diário de Lançamentos F&B.pdf' -> '/z/git/rotina/2026-01-15/./70. Diário de Lançamentos F&B.pdf'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./150. Histórico e Previsão CSV.csv' -> '/z/git/rotina/2026-01-15/./150. Histórico e Previsão CSV.csv'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./70. Diário de Lançamentos Cancelamentos.pdf' -> '/z/git/rotina/2026-01-15/./70. Diário de Lançamentos Cancelamentos.pdf'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./101. Saldos de contas pendentes.pdf' -> '/z/git/rotina/2026-01-15/./101. Saldos de contas pendentes.pdf'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./Booking.com Reviews.xlsx' -> '/z/git/rotina/2026-01-15/./Booking.com Reviews.xlsx'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./150. Histórico e Previsão 2026.xlsx' -> '/z/git/rotina/2026-01-15/./150. Histórico e Previsão 2026.xlsx'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./150. Histórico e Previsão.pdf' -> '/z/git/rotina/2026-01-15/./150. Histórico e Previsão.pdf'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./03. Aniversários.pdf' -> '/z/git/rotina/2026-01-15/./03. Aniversários.pdf'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./Prev Semanal.jpg' -> '/z/git/rotina/2026-01-15/./Prev Semanal.jpg'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./02. Chegadas.pdf' -> '/z/git/rotina/2026-01-15/./02. Chegadas.pdf'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./03. Cafés.pdf' -> '/z/git/rotina/2026-01-15/./03. Cafés.pdf'
+'/z/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios/./03. Residentes - Listagem de Hospedes.pdf' -> '/z/git/rotina/2026-01-15/./03. Residentes - Listagem de Hospedes.pdf'
+Backup finalizado com sucesso em: 15 de jan de 2026 22:53:22
+================================================

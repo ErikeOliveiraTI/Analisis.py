@@ -1,0 +1,77 @@
+#FONTE DA PESQUISA --»» 
+https://data-vitorramos.medium.com/importa%C3%A7%C3%A3o-de-arquivos-com-pandas-em-python-a10948797baf
+
+from biblioteca import openpy
+
+arquivo = pd.read_csv(“.csv”)
+
+# Importando o arquivo, neste caso separa por ";", sem o parâmetro "sep=" traz por padrão separação por vírgula (,)
+megasena = pd.read_csv("https://raw.githubusercontent.com/vitordiego/datasets/main/lotofacil_megasena_brasil/megascsv.csv", sep=";")
+megasena.head()
+
+# Importando o arquivo, neste caso separa por ";", sem o parâmetro "sep=" traz por padrão separação por vírgula (,)
+# nomeando as colunas
+cols = ["loteria", "data_sorteio", "bola_01", "bola_02", "bola_03", "bola_04", "bola_05", "bola_06"]
+url = "https://raw.githubusercontent.com/vitordiego/datasets/main/lotofacil_megasena_brasil/megascsv.csv"
+megasena = pd.read_csv(url, sep=";", names=cols)
+megasena.head()
+
+# Determinando quais colunas importar por localização
+cols_name = [0, 1]
+megasena = pd.read_csv(url_csv, usecols=cols_name, sep=";")
+megasena.head()
+
+# Determinando variáveis com caminho dos arquivos
+url_csv = "https://raw.githubusercontent.com/vitordiego/datasets/main/lotofacil_megasena_brasil/megascsv.csv"
+# Determinando quais colunas importar
+cols_name = ["lottery", "date_occured"]
+megasena = pd.read_csv(url_csv, usecols=cols_name, sep=";")
+megasena.head()
+
+
+# Limitando a quantidade de linhas com "nrows"
+megasena = pd.read_csv(url_csv, sep=";", nrows=10)
+megasena
+
+# Limitando a quantidade de linhas e para qual linha pular / iniciar a importação
+megasena = pd.read_csv(url_csv, sep=";", nrows=100, skiprows=2)
+megasena
+
+# Limitando a quantidade de linhas, o "header=None" desconsidera cabeçalho
+megasena = pd.read_csv(url_csv, sep=";", nrows=10, skiprows=1, names=("loteria", "data_jogo", "bola_01", "bola_02", "bola_03", "bola_04", "bola_05", "bola_06"),
+header=None)
+megasena
+
+# Importando arquivo e verificando o tipo de cada variável
+megasena = pd.read_csv(url_csv, sep=";")
+megasena.dtypes
+
+
+Importando arquivos Excel
+Similar aos parâmetros do pd.read_cvs:
+
+nrow: limitar quantidade de linhas carregadas
+skiprows: estipular em qual linha inicia o carregamento dos dados
+usecols: escolher as colunas para serem carregadas, podendo sinalizar pela localização Excel, ex: “A:C, G”
+# Importando arquivo .xls
+lotofacil = pd.read_excel("/content/d_lotfac.xls", nrows=13, skiprows=10, usecols="A:C")
+lotofacil
+
+
+================
+
+FASES DE TASKS - BI INTERATIVO
+
+TASK I - REUNIR FICHEIROS E ARQUIVOS QUE SERVIRÃO DE BASE DA DADOS PARA ANÁLÇISE DE DADOS, E A INTERAÇÃO DESSAS INFORMAÇÕES. 
+
+	ESSES DOCS SERÃO INSERIDOS VIA ARQUIVO .XSLX, E "NORMALIZADOS" NA LINGUAGEM POWERQUERY, VALIDACOES E ANALISE GRAFICA EM PYTHON, COM O AUXILIO DE FRAMEWORKS COMO OPENPYXL E PANDAS.
+
+
+TASK  II - ORGANIZAR DIAGRAMAS DE CASSOS DE USO, A FIM DE PREVER TODAS AS AÇÕES DAS ENTIDADES QUE E FUNCIONALIDADES QUE O DASHBOARD TERÁ.
+
+	 - USAR DE MODELOS EM APS DE METOLOGIA ÁGIL (KANBAN E SCRUM), E FDD PARA ACOMPANHAR O DESENVOLVIMENTO DO PROJETO.
+
+
+
+
+

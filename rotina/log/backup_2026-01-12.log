@@ -1,0 +1,35 @@
+================================================
+Backup iniciado em: 12 de jan de 2026 15:23:57
+================================================
+==============================================
+Verificando unidade de rede: 12 de jan de 2026 15:23:57
+==============================================
+Unidade de rede verificada com sucesso.
+
+Criando pastas...
+
+Validando origem...
+Origem encontrada.
+Copiando Caixa.xlsx...
+Copiando relatórios...
+Relatórios copiados com sucesso.
+
+Ficheiros guardados em: /z/git/rotina/12 JAN
+Rotina finalizada: 12 de jan de 2026 15:24:00
+==============================================
+================================================
+Backup iniciado em: Mon, Jan 12, 2026  5:26:20 PM
+================================================
+==============================================
+Verificando unidade de rede: Mon, Jan 12, 2026  5:26:20 PM
+==============================================
+Unidade /z verificada com sucesso.
+
+Criando pasta destino: /z/git/rotina/12 JAN
+ERRO: Arquivo Caixa.xlsx não encontrado em: /z/Caixa.xlsx
+Copiando relatórios...
+Relatórios copiados com sucesso.
+
+Ficheiros guardados em: /z/git/rotina/12 JAN
+Rotina finalizada: Mon, Jan 12, 2026  5:26:23 PM
+==============================================

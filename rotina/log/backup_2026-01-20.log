@@ -1,0 +1,93 @@
+[2026-01-20 17:04:21] [INFO] ============================================================
+[2026-01-20 17:04:21] [INFO] BACKUP INICIADO EM: 2026-01-20 17:04:21
+[2026-01-20 17:04:21] [INFO] ============================================================
+[2026-01-20 17:04:21] [INFO] Data da pasta: 20 JAN
+[2026-01-20 17:04:21] [INFO] Destino: z:\git\rotina\20 JAN
+
+[2026-01-20 17:04:21] [INFO] 
+➤ Validação do ambiente...
+[2026-01-20 17:04:21] [INFO] ============================================================
+[2026-01-20 17:04:21] [INFO] INICIANDO VALIDAÇÃO DO AMBIENTE
+[2026-01-20 17:04:21] [INFO] ============================================================
+[2026-01-20 17:04:21] [INFO] ✓ Unidade de rede acessível: z:\git
+[2026-01-20 17:04:21] [INFO] ✓ Pasta de origem acessível: z:\01.FO_Tejo\02.Night_Auditor\Relatorios_e_Ficheiros\Relatorios
+[2026-01-20 17:04:21] [WARNING] ⚠ Arquivo Caixa.xlsx não encontrado (não crítico)
+[2026-01-20 17:04:21] [INFO] ✓ VALIDAÇÃO CONCLUÍDA COM SUCESSO
+
+[2026-01-20 17:04:21] [INFO] 
+➤ Criar pasta destino...
+[2026-01-20 17:04:21] [INFO] ✓ Pasta criada/verificada: z:\git\rotina\20 JAN
+[2026-01-20 17:04:21] [INFO] 
+➤ Copiar Caixa.xlsx...
+[2026-01-20 17:04:21] [WARNING] ⚠ Caixa.xlsx não encontrado, pulando...
+[2026-01-20 17:04:21] [INFO] 
+➤ Copiar relatórios...
+[2026-01-20 17:04:25] [INFO] ✓ 27 arquivo(s) copiado(s) com sucesso
+[2026-01-20 17:04:25] [INFO] 
+============================================================
+[2026-01-20 17:04:25] [INFO] ✓ BACKUP CONCLUÍDO COM SUCESSO
+[2026-01-20 17:04:25] [INFO] Hora: 2026-01-20 17:04:25
+[2026-01-20 17:04:25] [INFO] ============================================================
+
+[2026-01-20 17:27:22] [INFO] ============================================================
+[2026-01-20 17:27:22] [INFO] BACKUP INICIADO EM: 2026-01-20 17:27:22
+[2026-01-20 17:27:22] [INFO] ============================================================
+[2026-01-20 17:27:22] [INFO] Data da pasta: 20 JAN
+[2026-01-20 17:27:22] [INFO] Destino: z:\git\rotina\20 JAN
+
+[2026-01-20 17:27:22] [INFO] 
+➤ Validação do ambiente...
+[2026-01-20 17:27:22] [INFO] ============================================================
+[2026-01-20 17:27:22] [INFO] INICIANDO VALIDAÇÃO DO AMBIENTE
+[2026-01-20 17:27:22] [INFO] ============================================================
+[2026-01-20 17:27:22] [INFO] ✓ Unidade de rede acessível: z:\git
+[2026-01-20 17:27:22] [INFO] ✓ Pasta de origem acessível: z:\01.FO_Tejo\02.Night_Auditor\Relatorios_e_Ficheiros\Relatorios
+[2026-01-20 17:27:22] [WARNING] ⚠ Arquivo Caixa.xlsx não encontrado (não crítico)
+[2026-01-20 17:27:22] [INFO] ✓ VALIDAÇÃO CONCLUÍDA COM SUCESSO
+
+[2026-01-20 17:27:22] [INFO] 
+➤ Criar pasta destino...
+[2026-01-20 17:27:22] [INFO] ✓ Pasta criada/verificada: z:\git\rotina\20 JAN
+[2026-01-20 17:27:22] [INFO] 
+➤ Copiar Caixa.xlsx...
+[2026-01-20 17:27:22] [WARNING] ⚠ Caixa.xlsx não encontrado, pulando...
+[2026-01-20 17:27:22] [INFO] 
+➤ Copiar relatórios...
+[2026-01-20 17:27:24] [INFO] ✓ 27 arquivo(s) copiado(s) com sucesso
+[2026-01-20 17:27:24] [INFO] 
+============================================================
+[2026-01-20 17:27:24] [INFO] ✓ BACKUP CONCLUÍDO COM SUCESSO
+[2026-01-20 17:27:24] [INFO] Hora: 2026-01-20 17:27:24
+[2026-01-20 17:27:24] [INFO] ============================================================
+
+[2026-01-20 18:03:00] [INFO] ============================================================
+[2026-01-20 18:03:00] [INFO] BACKUP INICIADO EM: 2026-01-20 18:03:00
+[2026-01-20 18:03:00] [INFO] ============================================================
+[2026-01-20 18:03:00] [INFO] Data da pasta: 20 JAN
+[2026-01-20 18:03:00] [INFO] Destino: z:\git\rotina\20 JAN
+
+[2026-01-20 18:03:00] [INFO] 
+➤ Validação do ambiente...
+[2026-01-20 18:03:00] [INFO] ============================================================
+[2026-01-20 18:03:00] [INFO] INICIANDO VALIDAÇÃO DO AMBIENTE
+[2026-01-20 18:03:00] [INFO] ============================================================
+[2026-01-20 18:03:00] [INFO] ✓ Unidade de rede acessível: z:\git
+[2026-01-20 18:03:00] [INFO] ✓ Pasta de origem acessível: z:\01.FO_Tejo\02.Night_Auditor\Relatorios_e_Ficheiros\Relatorios
+[2026-01-20 18:03:00] [WARNING] ⚠ Arquivo Caixa.xlsx não encontrado (não crítico)
+[2026-01-20 18:03:00] [INFO] ✓ VALIDAÇÃO CONCLUÍDA COM SUCESSO
+
+[2026-01-20 18:03:00] [INFO] 
+➤ Criar pasta destino...
+[2026-01-20 18:03:00] [INFO] ✓ Pasta criada/verificada: z:\git\rotina\20 JAN
+[2026-01-20 18:03:00] [INFO] 
+➤ Copiar Caixa.xlsx...
+[2026-01-20 18:03:00] [WARNING] ⚠ Caixa.xlsx não encontrado, pulando...
+[2026-01-20 18:03:00] [INFO] 
+➤ Copiar relatórios...
+[2026-01-20 18:03:02] [INFO] ✓ 27 arquivo(s) copiado(s) com sucesso
+[2026-01-20 18:03:03] [INFO] 
+============================================================
+[2026-01-20 18:03:03] [INFO] ✓ BACKUP CONCLUÍDO COM SUCESSO
+[2026-01-20 18:03:03] [INFO] Hora: 2026-01-20 18:03:03
+[2026-01-20 18:03:03] [INFO] ============================================================
+

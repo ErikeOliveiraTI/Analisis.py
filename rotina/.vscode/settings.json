@@ -1,0 +1,5 @@
+{
+    "powerquery.client.additionalSymbolsDirectories": [
+        "z:/git/rotina/.vscode/excel-pq-symbols"
+    ]
+}

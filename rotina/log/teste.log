@@ -1,0 +1,9 @@
+#!/bin/bash
+
+LOG_FILE="./teste.log"
+
+# Redireciona saída para o log **e também para o terminal**
+exec > >(tee -a "$LOG_FILE") 2>&1
+
+echo "Teste de log normal"
+echo "Teste de log de erro" >&2
