@@ -1,10 +1,32 @@
 #!/bin/bash
+export PATH=/usr/bin:/bin
 
 ################################################################################
 # Script: backup_rede.bash
 # Executa backup de rede para /z/git/rotina, cria pasta diária e logs
 # Compatível com Git Bash no Windows
+# Uso: ./backup_rede.bash ou bash backup_rede.bash
 ################################################################################
+
+set -o pipefail
+
+# ================= LOG DIÁRIO AUTOMÁTICO =================
+BASE_LOG_DIR="/z/git/rotina/log"
+DATA_LOG=$(date +"%Y-%m-%d")
+LOG_FILE="$BASE_LOG_DIR/backup_$DATA_LOG.log"
+
+mkdir -p "$BASE_LOG_DIR"
+
+# Redireciona TODA a saída (stdout e stderr) para o log
+exec >>"$LOG_FILE" 2>&1
+
+echo "================================================"
+echo "Backup iniciado em: $(date)"
+echo "================================================"
+# =========================================================
+
+# Variáveis de data
+DATA=$(date +"%d %b" | tr 'a-z' 'A-Z')
 
 # Ponto de montagem
 #MOUNT_POINT="/z"
@@ -47,11 +69,11 @@ mkdir -p "$LOG_DIR"
 
 # Caminhos de origem (CORRIGIDO)
 #ORIGEM="$MOUNT_POINT/01.FO_Tejo/02.Night_Auditor/'Relatorios /& Ficheiros'/Relatorios"
-ORIGEM="$MOUNT_POINT/01.FO_Tejo/02.Night_Auditor/Relatorios /& Ficheiros/Relatorios"
+ORIGEM="$MOUNT_POINT/01.FO_Tejo/02.Night_Auditor/Relatorios_e_Ficheiros/Relatorios"
 
 
 # Caminho da planilha (válido)
-CAIXA="$MOUNT_POINT/01.FO_Tejo/Caixa.xlsx"
+CAIXA="$MOUNT_POINT/Caixa.xlsx"
 
 # Valida origem
 if [ ! -d "$ORIGEM" ]; then
@@ -81,4 +103,3 @@ echo ""
 echo "Ficheiros guardados em: $DESTINO"
 echo "Rotina finalizada: $(date)"
 echo "=============================================="
-

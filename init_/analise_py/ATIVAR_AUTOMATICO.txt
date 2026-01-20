@@ -1,0 +1,71 @@
+ATIVANDO AUTOMÁTICO NO LOGIN
+=============================
+
+Para que o agendador execute automaticamente toda vez que você faz login:
+
+PASSO 1: Abra a pasta de Startup
+----------------------------------
+
+Pressione WIN+R e digite:
+  shell:startup
+
+Depois pressione ENTER.
+
+Vai abrir uma pasta (C:\Users\seu_usuario\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup)
+
+
+PASSO 2: Crie um atalho
+------------------------
+
+1. Na pasta que abriu, clique com botão direito
+2. Selecione: Novo > Atalho
+3. Digite o caminho:
+   z:\git\init_\analise_py\iniciar_agendador.bat
+4. Clique Avançar
+5. Nome: Agendador de Backup
+6. Clique Concluir
+
+Pronto!
+
+
+PASSO 3: Teste
+---------------
+
+1. Feche o agendador que está rodando (no terminal)
+2. Reinicie o Windows
+3. Verifique se o agendador iniciou automaticamente
+4. Clique em "Detalhes da Tarefa" para confirmar que está rodando
+
+
+VERIFICAR SE ESTÁ FUNCIONANDO
+==============================
+
+Para confirmar que está rodando:
+
+1. Abra: z:\git\rotina\log\scheduler.log
+
+2. Verifique se tem linhas como:
+   [2026-01-12 17:18:30] Agendador de Backup iniciado
+   
+3. Pronto! Está funcionando
+
+
+LOGS
+====
+
+O arquivo scheduler.log mostra:
+- Quando o agendador iniciou
+- Quando cada backup foi executado
+- Qualquer erro que aconteça
+
+Localização: z:\git\rotina\log\scheduler.log
+
+
+PRÓXIMOS PASSOS
+===============
+
+1. Feche o terminal onde o Python está rodando (Ctrl+C)
+2. Siga os passos acima para criar o atalho
+3. Reinicie o computador
+4. Pronto! Automático a partir de agora
+

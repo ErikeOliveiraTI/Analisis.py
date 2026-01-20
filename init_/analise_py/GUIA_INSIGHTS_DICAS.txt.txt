@@ -1,0 +1,222 @@
+GUIA DE REFERÊNCIA - BACKUP AUTOMÁTICO
+=======================================
+
+DATA: 14 de Janeiro de 2026
+OBJETIVO: Agendador de backup automático diário às 17:00
+
+═══════════════════════════════════════════════════════════════
+
+ARQUITETURA DA SOLUÇÃO
+======================
+
+1. backup_rede.bash
+   - Script que copia os arquivos
+   - Não foi modificado (mantido intocável)
+   
+2. backup_scheduler.py
+   - Agendador que monitora a hora
+   - Executa o backup às 17:00
+   - Roda em loop permanente
+   
+3. iniciar_agendador_background.bat
+   - Batch que inicia o Python em background
+   - Usa: start "" /b python backup_scheduler.py
+   
+4. Agendador-Backup-Background.lnk
+   - Atalho na pasta Startup do Windows
+   - Executa automaticamente ao fazer login
+
+═══════════════════════════════════════════════════════════════
+
+FLUXO DE EXECUÇÃO
+=================
+
+Login Windows
+    ↓
+Startup executa Agendador-Backup-Background.lnk
+    ↓
+iniciar_agendador_background.bat abre
+    ↓
+Python inicia backup_scheduler.py em background
+    ↓
+Git Bash fecha automaticamente
+    ↓
+Agendador monitora hora (30 segundos cada verificação)
+    ↓
+Às 17:00: Executa backup_rede.bash
+    ↓
+Cria pasta /z/git/rotina/DD MMM/
+    ↓
+Copia Caixa.xlsx + relatórios
+    ↓
+Registra tudo em logs
+
+═══════════════════════════════════════════════════════════════
+
+INSIGHTS E DICAS IMPORTANTES
+=============================
+
+1. EXECUÇÃO EM BACKGROUND
+   
+   ❌ NÃO faça:
+   - python backup_scheduler.py (bloqueia terminal)
+   - Deixar janela aberta
+   
+   ✅ FAÇA:
+   - nohup python ... &  (roda em background)
+   - start "" /b python ... (Windows)
+   - Atalho na Startup (automático)
+
+2. DIFERENÇA ENTRE EXECUÇÃO MANUAL vs AUTOMÁTICA
+   
+   Manual:
+   - Você executa o comando
+   - Terminal fica bloqueado
+   - Se fechar: programa para
+   - Útil para TESTES
+   
+   Automática:
+   - Atalho Startup inicia ao login
+   - Roda invisível em background
+   - Continua mesmo se fechar terminal
+   - Ideal para PRODUÇÃO
+
+3. TESTES vs PRODUÇÃO
+   
+   Teste agora:
+   - Execute manualmente
+   - Verifique logs
+   - Confirme funcionamento
+   
+   Produção (amanhã):
+   - PC reinicia
+   - Atalho executa automaticamente
+   - Sem intervenção manual necessária
+
+4. LOGS E DEBUGGING
+   
+   Sempre verificar:
+   - tail -20 /z/git/rotina/log/scheduler.log
+   - ps aux | grep backup_scheduler
+   - ls /z/git/rotina/ | grep JAN
+   
+   Interpretação:
+   - [timestamp] = Quando aconteceu
+   - "Iniciando backup" = Começou
+   - "concluído com sucesso" = Terminou OK
+   - "ERRO" = Problema identificado
+
+5. INTERRUPÇÃO DO PROGRAMA
+   
+   ❌ CTRL+C durante execução manual = Normal
+   - Apenas durante TESTES
+   - Não afeta a automação
+   
+   ✅ Em produção:
+   - Agendador roda invisível
+   - Você não faz nada
+   - Apenas deixa PC ligado
+
+6. HORÁRIOS E TIMING
+   
+   Configurado: 17:00 (5 PM)
+   Janela de execução: 17:00 a 17:02 (3 minutos)
+   Verificação de hora: a cada 30 segundos
+   
+   Por quê?
+   - Evita execução duplicada
+   - Garante que apenas uma vez por dia
+   - Aguarda 3 minutos após execução
+
+7. CAMINHOS E COMPATIBILIDADE
+   
+   Windows Path: z:\git\init_\analise_py\
+   Unix Path:   /z/git/init_/analise_py/
+   
+   Git Bash usa paths Unix automaticamente
+   Converter: C:\Users\ → /c/Users/
+
+8. ESTRUTURA DE PASTAS DE SAÍDA
+   
+   /z/git/rotina/
+   ├── 12 JAN/  (data criada automaticamente)
+   │   ├── Caixa.xlsx
+   │   └── [relatórios copiados]
+   ├── 13 JAN/
+   ├── 14 JAN/
+   └── log/
+       ├── scheduler.log (agendador)
+       └── backup_YYYY-MM-DD.log (cada backup)
+
+═══════════════════════════════════════════════════════════════
+
+CHECKLIST PARA AMANHÃ
+======================
+
+□ PC ligado até 17:00
+□ Conexão com unidade Z disponível
+□ Atalho na Startup executou (invisível)
+□ Agendador está em background
+□ Às 17:00: Pasta criada automaticamente
+□ Verifique logs para confirmar sucesso
+
+═══════════════════════════════════════════════════════════════
+
+TROUBLESHOOTING RÁPIDO
+=======================
+
+Problema: Pasta não foi criada
+Solução:
+  1. Verificar log: tail /z/git/rotina/log/scheduler.log
+  2. Verificar hora: date
+  3. Verificar unidade Z: ls /z
+  
+Problema: Agendador não está rodando
+Solução:
+  1. Verificar processo: ps aux | grep backup_scheduler
+  2. Reiniciar: kill [PID]
+  3. Executar manualmente para testar
+  
+Problema: Erro nos logs
+Solução:
+  1. Ler erro completo: tail -30 scheduler.log
+  2. Verificar caminhos existem
+  3. Verificar permissões de arquivo
+
+═══════════════════════════════════════════════════════════════
+
+COMANDOS ÚTEIS PARA CONSULTA
+=============================
+
+# Verificar se agendador está rodando
+ps aux | grep backup_scheduler
+
+# Ver últimos logs
+tail -20 /z/git/rotina/log/scheduler.log
+
+# Ver pastas criadas
+ls -lah /z/git/rotina/ | grep JAN
+
+# Matar processo (se necessário)
+kill -9 [PID]
+
+# Encontrar processo Python
+pgrep -f backup_scheduler
+
+# Ver detalhes do atalho
+file "$APPDATA/Microsoft/Windows/Start Menu/Programs/Startup/Agendador-Backup-Background.lnk"
+
+═══════════════════════════════════════════════════════════════
+
+NOTAS FINAIS
+============
+
+✅ Sistema está PRONTO para produção
+✅ Não requer privilégios administrativos
+✅ Automático a cada login
+✅ Roda em background invisível
+✅ Logs detalhados para debugging
+
+Próxima ação: Reiniciar PC para testar automação completa
+
+═══════════════════════════════════════════════════════════════

@@ -1,0 +1,31 @@
+Perfeito — **para gerar os gráficos usando a sua própria planilha**, eu preciso **ver o arquivo** ou pelo menos **as colunas e algumas linhas de exemplo**.
+
+📌 **Por favor, envie a planilha aqui (anexe o arquivo .xlsx)**
+— ou copie/cole **as colunas e umas 5 a 10 linhas** dos dados.
+
+Com isso eu vou:
+
+✔ Ler sua planilha real
+✔ Criar gráficos usando exatamente seus dados
+✔ Gerar as fórmulas `=PY()` prontas para inserir no Excel
+✔ Montar um dashboard se você quiser
+✔ Devolver um Excel completo com tudo configurado (opcional)
+
+---
+
+### 🔎 O que preciso para começar
+
+Qualquer uma das opções abaixo:
+
+1. **Enviar o arquivo .xlsx**
+2. **Print da aba com os dados**
+3. **Lista das colunas + algumas linhas**
+
+Assim que você enviar, eu já gero:
+
+* Gráficos (receita, lucro, ocupação etc.)
+* Heatmap de desempenho
+* KPIs
+* Dashboard em Python dentro do próprio Excel
+
+👉 Basta anexar a planilha!

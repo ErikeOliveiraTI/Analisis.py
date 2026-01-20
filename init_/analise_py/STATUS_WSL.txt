@@ -1,0 +1,95 @@
+RESULTADO: WSL NÃO ESTÁ INSTALADO
+==================================
+
+Você precisa instalar o WSL para usar a solução com Cron.
+
+OPÇÃO A: INSTALAÇÃO AUTOMÁTICA (Recomendado)
+==============================================
+
+1. Abra PowerShell como Administrador
+   - Clique com botão direito no ícone PowerShell
+   - Selecione "Executar como administrador"
+
+2. Execute o script de instalação:
+   powershell -ExecutionPolicy Bypass -File "z:\git\init_\analise_py\instalar_wsl.ps1"
+
+3. Aguarde a instalação concluir
+
+4. Reinicie o computador quando solicitado
+
+5. Após reiniciar, o Ubuntu vai abrir automaticamente
+   - Configure um usuário
+   - Configure uma senha
+   - Aguarde concluir
+
+6. Depois, configure o Cron:
+   bash /mnt/z/git/init_/analise_py/configurar_cron_wsl.sh
+
+
+OPÇÃO B: INSTALAÇÃO MANUAL
+===========================
+
+1. Abra PowerShell como Administrador
+
+2. Execute os comandos:
+   wsl --install
+   
+3. Espere terminar
+
+4. Reinicie o computador
+
+5. Abra "Ubuntu" do menu Iniciar
+
+6. Configure usuário e senha
+
+7. Configure o Cron (veja acima)
+
+
+OPÇÃO C: SEM WSL (Alternativa)
+==============================
+
+Se não conseguir instalar WSL, use estas alternativas:
+
+A) Task Scheduler GUI (interface gráfica)
+   - Abra "Agendador de Tarefas"
+   - Crie manualmente (sem command line)
+   - Pode pedir privilégios admin
+
+B) Executar na inicialização do Windows
+   - Crie um atalho na pasta Startup
+   - Executa quando você faz login
+
+C) AutoHotkey
+   - Instale AutoHotkey
+   - Crie um script que roda no horário desejado
+
+D) Terceiros (como BATman, Absolute Launcher)
+   - Use aplicativos gratuitos de agendamento
+
+
+PRÓXIMOS PASSOS
+===============
+
+Escolha:
+
+1. INSTALAR WSL AUTOMÁTICO
+   → Abra PowerShell como Admin
+   → Execute: powershell -ExecutionPolicy Bypass -File "z:\git\init_\analise_py\instalar_wsl.ps1"
+   → Reinicie
+   → Está pronto!
+
+2. INSTALAR WSL MANUAL
+   → Abra PowerShell como Admin
+   → Execute: wsl --install
+   → Reinicie
+   → Configure o Cron
+
+3. NÃO USAR WSL
+   → Use uma das alternativas acima
+   → Recomendo: Task Scheduler GUI ou Startup Folder
+
+RECOMENDAÇÃO
+============
+A melhor opção é a 1 (WSL automático). É mais confiável e funciona
+sem privilégios administrativos após a instalação inicial.
+

@@ -1,0 +1,172 @@
+SOLUÇÕES SEM PRIVILÉGIOS ADMINISTRATIVOS
+=========================================
+
+Como você não tem acesso de administrador, não pode:
+✗ Instalar WSL
+✗ Usar Task Scheduler
+✗ Modificar configurações do sistema
+
+MAS você pode usar estas alternativas:
+
+
+OPÇÃO 1: EXECUTAR AUTOMATICAMENTE NO LOGIN
+============================================
+
+1. Crie um atalho para o backup
+   - Clique direito em desktop → Novo → Atalho
+   - Caminho: C:\Program Files\Git\bin\bash.exe -c "bash z:\git\init_\analise_py\backup_rede.bash"
+   - Nome: Backup-Rede
+   - Clique em Concluir
+
+2. Mova o atalho para a pasta Startup
+   - Pressione WIN+R
+   - Digite: shell:startup
+   - Arraste o atalho para esta pasta
+
+3. Pronto! O backup rodará toda vez que você fizer login
+
+VANTAGEM: Funciona sem admin
+
+
+OPÇÃO 2: SCRIPT PYTHON QUE MONITORA HORA
+==========================================
+
+Cria um programa que roda o backup no horário correto.
+
+Python precisa estar instalado. Verifique:
+  python --version
+
+Se tiver Python, crie um arquivo: backup_scheduler.py
+
+---COPIE ISTO---
+import subprocess
+import time
+from datetime import datetime
+
+while True:
+    now = datetime.now()
+    
+    # Se for 17:00, execute o backup
+    if now.hour == 17 and now.minute == 0:
+        print(f"[{now}] Iniciando backup...")
+        subprocess.run(['bash', 'z:/git/init_/analise_py/backup_rede.bash'])
+        # Aguarda 1 minuto para nao executar de novo no mesmo minuto
+        time.sleep(60)
+    else:
+        # Verifique a hora a cada 30 segundos
+        time.sleep(30)
+---FIM---
+
+Para executar:
+  python backup_scheduler.py
+
+Para deixar rodando sempre:
+  - Coloque um atalho na pasta Startup
+  - Ou crie um .bat que chama o Python
+
+
+OPÇÃO 3: SCRIPT BATCH QUE MONITORA HORA
+========================================
+
+Crie um arquivo: backup_monitor.bat
+
+---COPIE ISTO---
+@echo off
+:LOOP
+for /f "tokens=1-2 delims=/:" %%a in ('time /t') do (
+    set HORA=%%a
+)
+
+REM Se for 17 (17:00), executa
+if %HORA%==17 (
+    echo Iniciando backup as %time%
+    bash z:\git\init_\analise_py\backup_rede.bash
+    REM Aguarda 1 minuto
+    timeout /t 60 /nobreak
+)
+
+REM Verifica a cada 30 segundos
+timeout /t 30 /nobreak
+goto LOOP
+---FIM---
+
+Para executar:
+  backup_monitor.bat
+
+Para deixar rodando sempre:
+  - Coloque um atalho na pasta Startup
+  - O monitoramento roda enquanto está ligado
+
+
+OPÇÃO 4: USAR AUTOHOTKEY PORTABLE
+==================================
+
+AutoHotkey é um programa SEM instalação que agenda tarefas.
+
+1. Baixe AutoHotkey Portable:
+   https://www.autohotkey.com/ (versão portable)
+
+2. Crie um arquivo: backup_scheduler.ahk
+
+---COPIE ISTO---
+SetTimer, ExecutarBackup, 1000
+
+ExecutarBackup:
+{
+    time := A_Hour ":" A_Minute
+    if (A_Hour == 17 and A_Minute == 0)
+    {
+        RunWait, C:\Program Files\Git\bin\bash.exe -c "bash z:/git/init_/analise_py/backup_rede.bash"
+    }
+    return
+}
+---FIM---
+
+3. Clique 2x no arquivo .ahk para rodar
+4. Coloque um atalho na pasta Startup
+
+
+OPÇÃO 5: EXECUTAR MANUALMENTE
+==============================
+
+Se nada acima funcionar, você pode:
+
+1. Criar um atalho para executar o backup
+2. Clicar nele toda vez que precisar fazer backup
+
+Atalho:
+  C:\Program Files\Git\bin\bash.exe -c "bash z:\git\init_\analise_py\backup_rede.bash"
+
+
+RECOMENDAÇÃO
+============
+
+Ordem de preferência (sem admin):
+
+1. OPÇÃO 2 (Python) - Mais confiável
+   Se tiver Python instalado
+   Coloque na pasta Startup
+
+2. OPÇÃO 3 (Batch) - Mais fácil
+   Crie o arquivo .bat
+   Coloque na pasta Startup
+
+3. OPÇÃO 1 (Login) - Mais simples
+   Executa quando você faz login
+   Funciona com simples atalho
+
+4. OPÇÃO 5 (Manual) - Fallback
+   Se nada mais funcionar
+
+
+PRÓXIMOS PASSOS
+===============
+
+Qual você quer tentar?
+
+A) Python (recomendado)
+B) Batch (mais fácil)
+C) AutoHotkey (alternativa)
+D) Atalho no Login (mais simples)
+E) Manual (fallback)
+

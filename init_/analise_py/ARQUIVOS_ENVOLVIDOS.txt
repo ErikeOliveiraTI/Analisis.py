@@ -1,0 +1,256 @@
+ARQUIVOS ENVOLVIDOS NA AUTOMAÇÃO
+==================================
+
+ESTRUTURA GERAL
+===============
+
+/z/git/init_/analise_py/          ← Pasta do projeto
+  ├── ARQUIVOS EXECUTÁVEIS (2)
+  ├── SCRIPTS BATCH (2)
+  ├── SCRIPTS PYTHON (1)
+  ├── GUIAS E DOCUMENTAÇÃO (6)
+  └── ARQUIVO NO STARTUP (1)
+
+
+1. ARQUIVOS EXECUTÁVEIS PRINCIPAIS
+===================================
+
+📄 backup_rede.bash (2.8 KB)
+   - Tipo: Script Bash/Shell
+   - Localização: /z/git/init_/analise_py/backup_rede.bash
+   - Função: Copia os arquivos de backup da rede
+   - O que faz:
+     * Verifica unidade de rede Z
+     * Cria pasta diária (/z/git/rotina/DD MMM)
+     * Copia Caixa.xlsx
+     * Copia relatórios
+     * Registra tudo em logs
+   - Status: ✅ Testado e funcionando
+   - Executado por: Python agendador às 17:00
+
+📄 backup_scheduler.py (4.3 KB)
+   - Tipo: Script Python 3.13
+   - Localização: /z/git/init_/analise_py/backup_scheduler.py
+   - Função: Agendador que monitora a hora e executa backup
+   - O que faz:
+     * Deteta SO (Windows com Git Bash)
+     * Monitora hora a cada 30 segundos
+     * Às 17:00: Executa backup_rede.bash
+     * Registra logs em /z/git/rotina/log/scheduler.log
+     * Evita execução duplicada no mesmo dia
+   - Status: ✅ Rodando em background
+   - Iniciado por: iniciar_agendador.bat
+
+
+2. SCRIPTS DE INICIALIZAÇÃO (BATCH)
+====================================
+
+📄 iniciar_agendador.bat (221 bytes)
+   - Tipo: Script Batch (Windows)
+   - Localização: /z/git/init_/analise_py/iniciar_agendador.bat
+   - Função: Inicia o agendador Python
+   - O que faz:
+     * Detecta Python
+     * Executa: python /z/git/init_/analise_py/backup_scheduler.py
+   - Status: ✅ Criado e funcional
+   - Executado por: Atalho da Startup
+   - Frequência: Uma vez por login do usuário
+
+📄 agendar_backup.bat (2.2 KB)
+   - Tipo: Script Batch (alternativa descontinuada)
+   - Localização: /z/git/init_/analise_py/agendar_backup.bat
+   - Função: Versão anterior (usava schtasks/admin)
+   - Status: ⚠️ Descontinuado (requer admin)
+   - Nota: Mantido como referência
+
+
+3. SCRIPTS DE CONFIGURAÇÃO (PowerShell)
+========================================
+
+📄 criar_atalho_startup.ps1 (2.4 KB)
+   - Tipo: Script PowerShell
+   - Localização: /z/git/init_/analise_py/criar_atalho_startup.ps1
+   - Função: Cria o atalho automático na Startup
+   - O que faz:
+     * Detecta pasta Startup
+     * Cria atalho: Agendador-Backup.lnk
+     * Aponta para: iniciar_agendador.bat
+   - Status: ✅ Executado com sucesso
+   - Executado uma única vez (já foi rodado)
+
+📄 instalar_wsl.ps1 (2.2 KB)
+   - Tipo: Script PowerShell
+   - Função: Instalar WSL (não foi usado)
+   - Status: ⚠️ Não necessário (Python funciona bem)
+   - Nota: Mantido como alternativa
+
+
+4. SCRIPTS ALTERNATIVOS NÃO UTILIZADOS
+=======================================
+
+📄 backup_scheduler.bat (1.6 KB)
+   - Tipo: Script Batch puro
+   - Função: Agendador em Batch (sem Python)
+   - Status: ⚠️ Alternativa (menos confiável que Python)
+   - Nota: Funciona mas usa mais recursos
+
+📄 backup_login.sh (1.2 KB)
+   - Tipo: Script Bash
+   - Função: Rodar backup ao fazer login
+   - Status: ⚠️ Não utilizado
+   - Nota: Para WSL, mas Python é melhor
+
+📄 configurar_cron_wsl.sh (1.8 KB)
+   - Tipo: Script Bash
+   - Função: Configurar cron no WSL
+   - Status: ⚠️ Não utilizado
+   - Nota: WSL não estava disponível
+
+
+5. ARQUIVO NO STARTUP (CRIADO AUTOMATICAMENTE)
+================================================
+
+📄 Agendador-Backup.lnk (822 bytes)
+   - Tipo: Atalho Windows
+   - Localização: C:\Users\{username}\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\
+   - Nome completo: Agendador-Backup.lnk
+   - Aponta para: /z/git/init_/analise_py/iniciar_agendador.bat
+   - Status: ✅ Criado e funcional
+   - Execução: Uma vez por login do usuário
+   - Propriedades:
+     * Alvo: iniciar_agendador.bat
+     * Diretório: z:\git\init_\analise_py
+     * Janela: Minimizada
+
+
+6. ARQUIVOS DE SAÍDA/LOGS
+==========================
+
+📁 /z/git/rotina/log/
+   - scheduler.log (criado automaticamente)
+     Registra cada execução do agendador
+     Exemplo:
+       [2026-01-12 17:26:19] Iniciando backup...
+       [2026-01-12 17:26:23] Backup concluído com sucesso!
+
+   - backup_2026-01-12.log (criado automaticamente)
+     Registra detalhes de cada backup
+     Criado pelo backup_rede.bash
+
+📁 /z/git/rotina/12 JAN/
+   - Pasta criada pelo backup
+   - Contém:
+     * Caixa.xlsx
+     * Relatórios copiados
+
+   - 13 JAN/, 14 JAN/, etc (criadas diariamente)
+
+
+7. GUIAS E DOCUMENTAÇÃO
+=======================
+
+📄 PERGUNTAS_RESPONDIDAS.txt (3.3 KB)
+   Respostas às dúvidas principais
+
+📄 RESUMO_FINAL.txt (3.2 KB)
+   Resumo completo da configuração
+
+📄 ATIVAR_AUTOMATICO.txt (1.6 KB)
+   Instruções para ativar no Startup
+
+📄 GUIA_RAPIDO_SEM_ADMIN.txt (2.4 KB)
+   Guia rápido sem privilégios admin
+
+📄 SOLUCOES_SEM_ADMIN.txt (4.0 KB)
+   Alternativas sem privilégios admin
+
+📄 GUIA_WSL_CRON.txt (2.4 KB)
+   Guia para usar WSL com cron
+
+📄 ALTERNATIVAS_SEM_ADMIN.txt (2.2 KB)
+   Outras opções sem admin
+
+📄 OPCOES_CRON_MANUAL.txt (2.2 KB)
+   Configurar cron manualmente
+
+📄 STATUS_WSL.txt (2.2 KB)
+   Status da instalação WSL
+
+
+FLUXO DE EXECUÇÃO
+=================
+
+1. INICIALIZAÇÃO (ao fazer login)
+   └─ Windows Startup
+      └─ Agendador-Backup.lnk
+         └─ iniciar_agendador.bat
+            └─ python /z/git/init_/analise_py/backup_scheduler.py
+
+2. MONITORAMENTO (continuamente)
+   └─ backup_scheduler.py roda em loop
+      └─ Verifica hora a cada 30 segundos
+         └─ Se for 17:00: continua
+            └─ Se ainda não executou hoje: continua
+               └─ Executa bash backup_rede.bash
+
+3. BACKUP (às 17:00)
+   └─ backup_rede.bash executa
+      └─ Verifica unidade Z
+      └─ Cria pasta /z/git/rotina/DD MMM
+      └─ Copia Caixa.xlsx
+      └─ Copia relatórios
+      └─ Registra logs
+
+4. LOGS
+   └─ /z/git/rotina/log/scheduler.log
+   └─ /z/git/rotina/log/backup_YYYY-MM-DD.log
+
+
+DEPENDÊNCIAS
+============
+
+✅ Python 3.13.9         - Instalado
+✅ Git Bash              - Instalado (terminal padrão)
+✅ Bash                  - Disponível em Git Bash
+✅ Windows 10/11         - Sistema operacional
+❌ WSL                   - NÃO necessário
+❌ Privilégios Admin     - NÃO necessário
+
+
+FLUXO DE CRIAÇÃO DOS ARQUIVOS
+=============================
+
+1º - backup_rede.bash          (original, melhorado)
+2º - backup_scheduler.py       (agendador Python)
+3º - iniciar_agendador.bat     (iniciador batch)
+4º - criar_atalho_startup.ps1  (criador do atalho)
+5º - Agendador-Backup.lnk      (atalho criado)
+6º - Guias e documentação      (referencias)
+
+
+RESUMO FINAL
+============
+
+ARQUIVOS ESSENCIAIS (4):
+  ✅ backup_rede.bash              (executa backup)
+  ✅ backup_scheduler.py           (agendador)
+  ✅ iniciar_agendador.bat         (inicializador)
+  ✅ Agendador-Backup.lnk          (trigger)
+
+ARQUIVOS ALTERNATIVOS (4):
+  ⚠️ agendar_backup.bat            (requer admin)
+  ⚠️ backup_scheduler.bat          (menos confiável)
+  ⚠️ backup_login.sh               (alternativa WSL)
+  ⚠️ configurar_cron_wsl.sh        (alternativa WSL)
+
+SCRIPTS DE CONFIGURAÇÃO (2):
+  ✅ criar_atalho_startup.ps1      (já executado)
+  ⚠️ instalar_wsl.ps1              (não necessário)
+
+DOCUMENTAÇÃO (8):
+  📄 Vários guias e referências
+
+SAÍDA (2 pastas):
+  📁 /z/git/rotina/log/            (logs)
+  📁 /z/git/rotina/DD MMM/         (backups diários)
+

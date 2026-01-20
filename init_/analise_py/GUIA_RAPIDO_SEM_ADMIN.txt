@@ -1,0 +1,107 @@
+AGENDADOR SEM PRIVILÉGIOS ADMINISTRATIVOS
+==========================================
+
+Você tem 3 arquivos prontos para usar:
+
+1. backup_scheduler.py    (Python - RECOMENDADO)
+2. backup_scheduler.bat   (Batch - FÁCIL)
+3. SOLUCOES_SEM_ADMIN.txt (Outras opções)
+
+
+MÉTODO 1: USAR O SCRIPT BATCH (Mais Fácil)
+===========================================
+
+1. Abra o arquivo:
+   z:\git\init_\analise_py\backup_scheduler.bat
+
+2. Clique 2x para executar
+
+3. A janela vai ficar aberta monitorando a hora
+
+4. Às 17:00, executa automaticamente o backup
+
+PROBLEMA: Funciona apenas enquanto a janela está aberta
+         Se fechar, para de monitorar
+
+SOLUÇÃO: Deixar rodando 24/7 ou automatizar no login
+
+
+MÉTODO 2: USAR O SCRIPT PYTHON (Melhor)
+========================================
+
+PRÉ-REQUISITO: Ter Python instalado
+
+Para verificar:
+  Abra CMD e digite: python --version
+
+Se tiver Python:
+
+1. Abra CMD em: z:\git\init_\analise_py
+
+2. Execute:
+   python backup_scheduler.py
+
+3. Pronto! Vai monitorar e executar às 17:00
+
+VANTAGEM: Funciona melhor, menos uso de memória
+
+
+MÉTODO 3: EXECUTAR NA INICIALIZAÇÃO
+====================================
+
+Para que execute automaticamente ao fazer login:
+
+A) Com Batch:
+
+1. Pressione WIN+R
+2. Digite: shell:startup
+3. Crie um atalho para:
+   z:\git\init_\analise_py\backup_scheduler.bat
+4. Pronto! Roda quando você faz login
+
+
+B) Com Python:
+
+1. Pressione WIN+R
+2. Digite: shell:startup
+3. Crie um arquivo: iniciar_backup.bat
+
+---COPIE ISTO---
+@echo off
+start python z:\git\init_\analise_py\backup_scheduler.py
+---FIM---
+
+4. Coloque este arquivo .bat na pasta startup
+5. Pronto! Roda quando você faz login
+
+
+RECOMENDAÇÃO
+============
+
+Melhor opção: Python + Startup Folder
+
+1. Abra CMD em z:\git\init_\analise_py
+2. Digite: python backup_scheduler.py
+3. Verifique se funciona
+4. Se funcionar, crie um atalho na pasta Startup
+5. Pronto! Executa automaticamente no login
+
+
+PRÓXIMAS ETAPAS
+===============
+
+Escolha:
+
+A) Testar agora o script Batch
+   → Clique 2x em backup_scheduler.bat
+
+B) Testar agora o script Python
+   → Abra CMD em: z:\git\init_\analise_py
+   → Digite: python backup_scheduler.py
+
+C) Configurar para rodar no login
+   → Siga as instruções de "MÉTODO 3"
+
+D) Outras opções
+   → Leia: SOLUCOES_SEM_ADMIN.txt
+

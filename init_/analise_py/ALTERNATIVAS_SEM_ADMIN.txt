@@ -1,0 +1,73 @@
+ALTERNATIVAS PARA AGENDAR BACKUP SEM PRIVILÉGIOS ADMINISTRATIVOS
+==================================================================
+
+OPÇÃO 1: Usar o WSL (Windows Subsystem for Linux) com Cron
+-----------------------------------------------------------
+Se tem WSL instalado:
+
+1. Abra WSL (bash ou terminal Linux)
+2. Execute: crontab -e
+3. Adicione a linha:
+   0 17 * * * bash /mnt/z/git/init_/analise_py/backup_rede.bash
+
+4. Salve e saia (CTRL+X, Y, ENTER para nano)
+
+VANTAGEM: Funciona sem admin, roda automaticamente
+
+
+OPÇÃO 2: Executar na pasta Inicialização do Windows
+----------------------------------------------------
+1. Crie um arquivo: agendar_backup.vbs no C:\
+
+@echo off
+for /f "delims=" %%A in ('powershell Get-Date -format yyyy-MM-dd_HHmmss') do @set "timestamp=%%A"
+
+REM Aguarda ate as 17:00
+:LOOP
+for /f "tokens=1-2 delims=/:" %%A in ('time /t') do (
+    set HOUR=%%A
+    set MIN=%%B
+)
+
+if %HOUR% lss 17 (
+    timeout /t 60 /nobreak
+    goto LOOP
+)
+
+REM Executa backup
+bash z:\git\init_\analise_py\backup_rede.bash
+exit
+
+2. Copie para: C:\Users\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\
+
+3. Pronto! Executará quando fazer login
+
+
+OPÇÃO 3: Usar Task Scheduler GUI (sem command line)
+----------------------------------------------------
+1. Abra "Agendador de Tarefas"
+2. Clique em "Criar Tarefa Básica"
+3. Nome: Backup-Rede-Diario
+4. Trigger: Diário às 17:00
+5. Ação: Iniciar programa
+   - Programa: C:\Program Files\Git\bin\bash.exe
+   - Argumentos: -c "bash z:\git\init_\analise_py\backup_rede.bash"
+6. OK
+
+NOTA: Talvez peça privilégios neste ponto
+
+
+OPÇÃO 4: Solicitar ao Administrador de TI
+------------------------------------------
+Peça para criar a tarefa agendada com:
+- Nome: Backup-Rede-Diario
+- Executável: C:\Program Files\Git\bin\bash.exe
+- Argumentos: -c "bash z:\git\init_\analise_py\backup_rede.bash"
+- Horário: 17:00 diariamente
+
+
+RECOMENDAÇÃO
+============
+Se tem WSL: Use OPÇÃO 1 (cron)
+Se não tem WSL: Use OPÇÃO 2 (Startup folder)
+Se nenhuma funciona: Use OPÇÃO 4 (pedir ao admin de TI)

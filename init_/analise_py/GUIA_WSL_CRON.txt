@@ -1,0 +1,90 @@
+GUIA COMPLETO: OPÇÃO 1 - WSL COM CRON (Recomendado)
+=====================================================
+
+PRÉ-REQUISITO
+=============
+O WSL (Windows Subsystem for Linux) deve estar instalado.
+
+Para verificar:
+  Abra "PowerShell" e digite: wsl --list --verbose
+  
+Se não tem WSL:
+  1. Abra PowerShell como Administrador
+  2. Execute: wsl --install
+  3. Reinicie o computador
+  4. Abra WSL e configure usuário/senha
+
+
+PASSO A PASSO
+=============
+
+1. Abra WSL (encontre "Ubuntu" ou "Debian" no menu Iniciar)
+
+2. Execute o configurador automático:
+   bash /mnt/z/git/init_/analise_py/configurar_cron_wsl.sh
+
+3. Será aberto o editor nano com o arquivo crontab
+   - Digite: 0 17 * * * bash /mnt/z/git/init_/analise_py/backup_rede.bash
+   - Salve: CTRL+X, depois Y, depois ENTER
+
+4. Pronto! O backup rodará todos os dias às 17:00
+
+
+VERIFICAR SE FUNCIONOU
+======================
+
+Para listar tarefas agendadas:
+  crontab -l
+
+Você deve ver:
+  0 17 * * * bash /mnt/z/git/init_/analise_py/backup_rede.bash
+
+
+ENTENDER O CRON
+===============
+
+A linha do cron: 0 17 * * * bash /mnt/z/git/init_/analise_py/backup_rede.bash
+                 | |  | | |
+                 | |  | | +-- Dia da semana (0-7, 0=domingo)
+                 | |  | +----- Mês (1-12)
+                 | |  +------- Dia do mês (1-31)
+                 | +--------- Hora (0-23)
+                 +----------- Minuto (0-59)
+
+Exemplos:
+  0 17 * * *     -> 17:00 todos os dias
+  0 09 * * 1-5   -> 09:00 segunda a sexta
+  */30 * * * *   -> A cada 30 minutos
+  0 0 1 * *      -> Meia-noite do primeiro dia do mês
+
+
+TROUBLESHOOTING
+===============
+
+Se o cron não roda:
+  1. Verifique se o serviço cron está ativo:
+     sudo service cron status
+  
+  2. Se não estiver, inicie:
+     sudo service cron start
+
+  3. Verifique o log:
+     sudo tail -f /var/log/syslog | grep CRON
+
+
+VANTAGENS DESTA OPÇÃO
+=====================
+✓ Funciona sem privilégios administrativos
+✓ Roda mesmo se você não estiver logado
+✓ Não depende de janelas abertas
+✓ Muito confiável e estável
+✓ É o padrão em sistemas Linux/Unix
+
+
+PRÓXIMOS PASSOS
+===============
+1. Abra WSL
+2. Execute: bash /mnt/z/git/init_/analise_py/configurar_cron_wsl.sh
+3. Adicione a linha conforme instrucoes
+4. Verifique com: crontab -l
+5. Pronto!

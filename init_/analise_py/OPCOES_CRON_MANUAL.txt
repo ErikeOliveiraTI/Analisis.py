@@ -1,0 +1,99 @@
+OPÇÃO 1A: CONFIGURAR CRON MANUALMENTE
+======================================
+
+Se não quiser usar o script automático, faça manualmente:
+
+1. Abra WSL (Ubuntu/Debian no menu Iniciar)
+
+2. Digite os comandos:
+
+   sudo service cron start
+   
+   crontab -e
+
+3. Na primeira vez, escolha o editor:
+   - Pressione 2 e ENTER para usar nano (mais fácil)
+
+4. Vai abrir um arquivo de texto. Vá para o final e adicione:
+
+   0 17 * * * bash /mnt/z/git/init_/analise_py/backup_rede.bash
+
+5. Salve o arquivo:
+   - Pressione CTRL+X
+   - Pressione Y (para sim)
+   - Pressione ENTER
+
+6. Pronto! O backup foi agendado
+
+
+VERIFICAR SE FUNCIONOU
+======================
+
+Digite:
+  crontab -l
+
+Você deve ver a linha que adicionou
+
+===================================================
+
+OPÇÃO 1B: ADICIONAR LOG AO CRON (PARA MONITORAR)
+===================================================
+
+Se quiser que o cron salve um log do backup:
+
+1. Abra crontab:
+   crontab -e
+
+2. Modifique a linha para:
+   0 17 * * * bash /mnt/z/git/init_/analise_py/backup_rede.bash >> /mnt/z/git/rotina/log/cron_backup.log 2>&1
+
+3. Salve (CTRL+X, Y, ENTER)
+
+4. Verifique o log:
+   cat /mnt/z/git/rotina/log/cron_backup.log
+
+===================================================
+
+OPÇÃO 1C: EXECUTAR TODO DIA À NOITE (23:30)
+=============================================
+
+Se preferir rodar mais tarde (23:30 em vez de 17:00):
+
+1. Abra crontab:
+   crontab -e
+
+2. Use a linha:
+   30 23 * * * bash /mnt/z/git/init_/analise_py/backup_rede.bash
+
+3. Salve (CTRL+X, Y, ENTER)
+
+===================================================
+
+REMOVER O AGENDAMENTO
+=====================
+
+Se precisar remover depois:
+
+1. Digite:
+   crontab -r
+
+2. Confirme digitando Y
+
+===================================================
+
+DÚVIDAS?
+========
+
+WSL não inicia?
+  - Abra PowerShell
+  - Digite: wsl --install
+  - Reinicie o PC
+
+Cron não funciona?
+  - Verifique: sudo service cron status
+  - Se parado: sudo service cron start
+
+Preciso que rode ANTES das 17:00?
+  - Mude o horário: 0 16 * * * (16:00)
+  - Ou: 30 15 * * * (15:30)
+
