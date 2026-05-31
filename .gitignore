@@ -1,0 +1,29 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyt
+*.pym
+env/
+venv/
+.venv/
+
+# Environment and secrets
+.env
+*.env
+
+# Data and logs
+data_warehouse.db
+*.db
+*.sqlite
+log/
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/

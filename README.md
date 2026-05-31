@@ -1,2 +1,16 @@
-# Analisis.py
-Reposit√≥rio de desenvolvimento em linguagem de proghrama√ß√£o Python, utilizando frameworks de desenvolvimento em python, voltados √† automa√ß√£o de tarefas, aprimoramento de analise de dados, servindo como uma b√∫ssola estrat√©gica para melhorar tomada de decis√£o, com gera√ß√£o de gr√°ficos e dashboards em Pandas, shellscript e python integrados a IA
+# Rotina Automation Project
+
+Este projeto automatiza a captura e tratamento de relatÛrios em PDF, modela dados e alimenta um banco de dados SQLite para an·lise.
+
+## Boas pr·ticas de seguranÁa
+
+- N„o commit arquivos de dados sensÌveis como `data_warehouse.db`.
+- N„o commit arquivos de log ou arquivos de credenciais.
+- Utilize `.env` para definir caminhos e credenciais locais.
+- Mantenha o arquivo `.env.example` versionado como modelo, mas ignore o `.env` real.
+
+## ConfiguraÁ„o local
+
+1. Copie `.env.example` para `.env`.
+2. Ajuste `DATAWAREHOUSE_DB_PATH` para o caminho local do seu banco de dados.
+3. Execute o script com Python.
