@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+.app-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+h1 {
+    margin: 0 0 8px;
+    font-size: 2rem;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.08);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#chart-container {
+    min-height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    border: 2px dashed #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+#data-summary,
+#diagram-json {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+#diagram-json {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    padding: 16px;
+    border-radius: 8px;
+    max-height: 320px;
+    overflow: auto;
+}

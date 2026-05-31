@@ -16,7 +16,7 @@ Acesso:
   POST http://localhost:5000/api/processar-backup
 """
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from datetime import datetime, timedelta
 import logging
@@ -33,7 +33,11 @@ from data_warehouse import DataWarehouse, ConfigDW, logger as dw_logger
 # CONFIGURAÇÃO FLASK
 # ============================================================================
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    template_folder='templates',
+    static_folder='static'
+)
 CORS(app)  # Habilitar CORS para consumo cross-origin
 
 # Configurar logging
@@ -84,6 +88,13 @@ def validar_data(data_str: str) -> bool:
 # ROTAS - HEALTH CHECK
 # ============================================================================
 
+@app.route('/', methods=['GET'])
+def index():
+    """Dashboard raiz"""
+    if dw is None:
+        return erro("Data Warehouse não disponível", 503)
+    return render_template('index.html')
+
 @app.route('/health', methods=['GET'])
 def health_check():
     """Health check da API"""
@@ -115,6 +126,111 @@ def status():
         )
     except Exception as e:
         return erro(f"Erro ao obter status: {str(e)}", 500)
+
+
+@app.route('/api/data', methods=['GET'])
+def api_data():
+    """Retorna dados de caixa em JSON"""
+    if dw is None:
+        return erro("Data Warehouse não disponível", 503)
+
+    try:
+        data_inicio = request.args.get('data_inicio')
+        data_fim = request.args.get('data_fim')
+        df = dw.consultar_caixa(data_inicio, data_fim)
+        dados = df.to_dict(orient='records') if not df.empty else []
+        return sucesso(
+            data={
+                "total_registros": len(dados),
+                "registros": dados
+            },
+            mensagem=f"Retornados {len(dados)} registros de caixa"
+        )
+    except Exception as e:
+        api_logger.error(f"Erro em GET /api/data: {str(e)}")
+        return erro(f"Erro ao obter dados: {str(e)}", 500)
+
+
+@app.route('/api/charts', methods=['GET'])
+def api_charts():
+    """Retorna séries de dados para gráficos"""
+    if dw is None:
+        return erro("Data Warehouse não disponível", 503)
+
+    try:
+        df = dw.consultar_caixa()
+        if df.empty:
+            return sucesso(
+                data={
+                    "series": [],
+                    "labels": []
+                },
+                mensagem="Sem dados para gráficos"
+            )
+
+        agrupado = df.groupby('data').agg({
+            'valor_entrada': 'sum',
+            'valor_saida': 'sum',
+            'saldo': 'sum'
+        }).reset_index()
+        agrupado['data'] = agrupado['data'].astype(str)
+
+        return sucesso(
+            data={
+                "labels": agrupado['data'].tolist(),
+                "series": [
+                    {
+                        "name": "Entrada",
+                        "values": agrupado['valor_entrada'].fillna(0).tolist()
+                    },
+                    {
+                        "name": "Saída",
+                        "values": agrupado['valor_saida'].fillna(0).tolist()
+                    },
+                    {
+                        "name": "Saldo",
+                        "values": agrupado['saldo'].fillna(0).tolist()
+                    }
+                ]
+            },
+            mensagem="Dados de gráfico retornados"
+        )
+    except Exception as e:
+        api_logger.error(f"Erro em GET /api/charts: {str(e)}")
+        return erro(f"Erro ao obter dados de gráfico: {str(e)}", 500)
+
+
+@app.route('/api/diagrams', methods=['GET'])
+def api_diagrams():
+    """Retorna um diagrama de entidade simples em JSON"""
+    if dw is None:
+        return erro("Data Warehouse não disponível", 503)
+
+    try:
+        diagram = {
+            "nodes": [
+                {"id": "dim_datas", "label": "dim_datas"},
+                {"id": "dim_tipos_arquivo", "label": "dim_tipos_arquivo"},
+                {"id": "fato_backups", "label": "fato_backups"},
+                {"id": "fato_caixa", "label": "fato_caixa"},
+                {"id": "fato_relatorios", "label": "fato_relatorios"},
+                {"id": "auditoria_processamento", "label": "auditoria_processamento"}
+            ],
+            "edges": [
+                {"from": "fato_backups", "to": "dim_datas"},
+                {"from": "fato_backups", "to": "dim_tipos_arquivo"},
+                {"from": "fato_caixa", "to": "fato_backups"},
+                {"from": "fato_caixa", "to": "dim_datas"},
+                {"from": "fato_relatorios", "to": "fato_backups"},
+                {"from": "fato_relatorios", "to": "dim_datas"},
+                {"from": "auditoria_processamento", "to": "fato_backups"},
+                {"from": "auditoria_processamento", "to": "dim_datas"}
+            ]
+        }
+        return sucesso(data=diagram, mensagem="Diagrama de entidade retornado")
+    except Exception as e:
+        api_logger.error(f"Erro em GET /api/diagrams: {str(e)}")
+        return erro(f"Erro ao obter diagrama: {str(e)}", 500)
 
 # ============================================================================
 # ROTAS - GET - CONSULTAS DE CAIXA
@@ -472,7 +588,7 @@ if __name__ == '__main__':
     
     # Usar host 0.0.0.0 para aceitar conexões externas
     host = '0.0.0.0' if platform.system() != 'Windows' else '127.0.0.1'
-    port = 5000
+    port = int(os.getenv('PORT', os.getenv('FLASK_RUN_PORT', '5000')))
     debug = True
     
     api_logger.info(f"{'='*60}")
@@ -482,8 +598,12 @@ if __name__ == '__main__':
     api_logger.info(f"Debug: {debug}")
     api_logger.info(f"{'='*60}\n")
     api_logger.info("Endpoints disponíveis:")
+    api_logger.info("  GET  / - Dashboard HTML")
     api_logger.info("  GET  /health - Health check")
     api_logger.info("  GET  /status - Status do DW")
+    api_logger.info("  GET  /api/data - Dados de caixa")
+    api_logger.info("  GET  /api/charts - Dados de gráfico")
+    api_logger.info("  GET  /api/diagrams - Diagrama de entidade")
     api_logger.info("  GET  /api/caixa - Consultar caixa")
     api_logger.info("  GET  /api/resumo-diario - Resumo de um dia")
     api_logger.info("  GET  /api/relatorios - Listar relatórios")

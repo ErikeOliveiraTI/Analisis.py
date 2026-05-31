@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Warehouse Hosteling YOU</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Data Warehouse Hosteling YOU</h1>
+            <p id="status-message">Carregando dados...</p>
+        </header>
+
+        <main>
+            <section class="card">
+                <h2>Gráfico de Valores</h2>
+                <div id="chart-container">Aguarde, carregando gráfico...</div>
+            </section>
+
+            <section class="card">
+                <h2>Resumo de Registros</h2>
+                <div id="data-summary"></div>
+            </section>
+
+            <section class="card">
+                <h2>Diagrama de Entidade</h2>
+                <pre id="diagram-json"></pre>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
